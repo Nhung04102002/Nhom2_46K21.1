@@ -1,0 +1,38 @@
+﻿@page
+@model QLCH_Nhom2.Pages.NhapHang.NhapHangModel
+@{
+}
+<div style="background-color:#1877F2;">
+    <hr />
+    <h1 style="text-align:center; color:white;">NHẬP HÀNG</h1>
+    <hr />
+</div>
+<br />
+<a class="btn btn-primary btn-sm" style="background-color:#0dac50; float:right; margin-right: 83px; width: 92px; height:40px; padding-bottom: 0;
+    padding-top: 8px;" href="/NhapHang/Create">Thêm mới</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Mã nhập kho</th>
+            <th>Nhà cung cấp</th>
+            <th>Ngày nhập</th>
+            <th>Thanh toán</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var NK in Model.listNK)
+        {
+            <tr>
+                <td>@NK.MaNK</td>
+                <td>@NK.TenNCC</td>
+                <td>@NK.NgayNhap</td>
+                <td>@NK.ThanhToan</td>
+                <td>
+                    <a class="btn btn-primary btn-sm" href="/NhapHang/Info?MaNK=@NK.MaNK">Xem</a>
+                    <a class="btn btn-danger btn-sm" href="/NhapHang/Delete?MaNK=@NK.MaNK">Xoá</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

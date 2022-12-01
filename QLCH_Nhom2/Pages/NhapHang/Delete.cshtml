@@ -1,0 +1,30 @@
+﻿@page
+@using System.Data.SqlClient;
+@model QLCH_Nhom2.Pages.NhapHang.DeleteModel
+@{
+    try
+    {
+        String MaNK = Request.Query["MaNK"];
+
+        String connectionString = "Data Source=.\\sqlexpress;Initial Catalog=Nhom2_QLBH;Integrated Security=True";
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            connection.Open();
+            String sql = "delete CT_PhieuNK where MaNK=@MaNK";
+
+            using (SqlCommand command = new SqlCommand(sql, connection))
+            {
+                command.Parameters.AddWithValue("@MaNK", MaNK);
+
+                command.ExecuteNonQuery();
+            }
+        }
+    }
+    catch (Exception)
+    {
+
+    }
+    Response.Redirect("/NhapHang/NhapHang");
+}
+
+

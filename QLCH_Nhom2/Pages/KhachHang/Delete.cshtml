@@ -1,0 +1,28 @@
+﻿@page
+@using System.Data.SqlClient;
+@model QLCH_Nhom2.Pages.KhachHang.DeleteModel
+@{
+    try
+    {
+        String MaKH = Request.Query["MaKH"];
+
+        String connectionString = "Data Source=.\\sqlexpress;Initial Catalog=Nhom2_QLBH;Integrated Security=True";
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            connection.Open();
+            String sql = "delete KHACHHANG where MaKH=@MaKH";
+
+            using (SqlCommand command = new SqlCommand(sql, connection))
+            {
+                command.Parameters.AddWithValue("@MaKH", MaKH);
+
+                command.ExecuteNonQuery();
+            }
+        }
+    }
+    catch (Exception)
+    {
+
+    }
+    Response.Redirect("/KhachHang/KhachHang");
+}

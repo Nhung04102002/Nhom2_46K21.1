@@ -1,0 +1,38 @@
+﻿@page
+@model QLCH_Nhom2.Pages.NCC.NCCModel
+@{
+}
+<div style="background-color:#1877F2;">
+    <hr />
+    <h1 style="text-align:center; color:white">NHÀ CUNG CẤP</h1>
+    <hr />
+</div>
+<br />
+<a class="btn btn-primary btn-sm" style="background-color:#0dac50; float:right; margin-right: 68px; width: 90px; height:40px; padding-bottom: 0;
+    padding-top: 8px;" href="/NCC/Create">Thêm mới</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Mã nhà cung cấp</th>
+            <th>Tên nhà cung cấp</th>
+            <th>Địa chỉ</th>
+            <th>Số điện thoại</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var NCC in Model.listNCC)
+        {
+            <tr>
+                <td>@NCC.MaNCC</td>
+                <td>@NCC.TenNCC</td>
+                <td>@NCC.DiaChi</td>
+                <td>@NCC.SDT</td>
+                <td>
+                    <a class="btn btn-primary btn-sm" href="/NCC/Edit?MaNCC=@NCC.MaNCC">Sửa</a>
+                    <a class="btn btn-danger btn-sm" href="/NCC/Delete?MaNCC=@NCC.MaNCC">Xoá</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
