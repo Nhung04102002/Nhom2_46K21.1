@@ -1,10 +1,67 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
 }
+<style>
+    header{
+        display:none;
+    }
+    h1{
+        text-align:center;
+        color: #1877F2;
+        margin: 30px 0px 40px 0px;
+    }
+    .row{
+        margin:auto;
+        width: 70%;
+    }
+</style>
+<br />
+<h1>ĐĂNG NHẬP</h1>
+<br />
+    @if (Model.errorMessage.Length > 0)
+    {
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>@Model.errorMessage</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<form method="post">
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Username</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="UserName" value="@Model.loginInfo.UserName">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Password</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="Pass" value="@Model.loginInfo.Pass">
+        </div>
+    </div>
+  
+    @if (Model.successMessage.Length > 0)
+    {
+        <div class="row mb-3">
+            <div class="col-sm-9">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>@Model.successMessage</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="offset-sm-3 col-sm-3 d-grid" style="margin: 30px auto 30px auto;">
+        <button type="submit" class="btn btn-primary">Đăng nhập</button>
+    </div>
+    <br />
+
+    <div class="col-sm-3 d-grid" style="margin:auto; text-align:center;">
+            <p>Bạn chưa có tài khoản?</p>
+            <a style="background-color:#0dac50;" class="btn btn-primary" href="/Hang/Create">Đăng kí</a>
+        </div>
+
+</form>
+
