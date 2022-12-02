@@ -9,7 +9,7 @@
     h1{
         text-align:center;
         color: #1877F2;
-        margin: 30px 0px 40px 0px;
+        margin: 50px 0px 40px 0px;
     }
     .row{
         margin:auto;
@@ -17,51 +17,41 @@
     }
 </style>
 <br />
-<h1>ĐĂNG NHẬP</h1>
-<br />
-    @if (Model.errorMessage.Length > 0)
-    {
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            <strong>@Model.errorMessage</strong>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    }
+<div style="border: 2px solid #1877F2; border-radius: 10px; width:40%; margin: 130px auto 0px auto;">
+    <h1>ĐĂNG NHẬP</h1>
+    <br />
+        @if (Model.errorMessage.Length > 0)
+        {
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>@Model.errorMessage</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
 
-<form method="post">
-    <div class="row mb-3">
-        <label class="col-sm-3 col-form-label">Username</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="UserName" value="@Model.loginInfo.UserName">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label class="col-sm-3 col-form-label">Password</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="Pass" value="@Model.loginInfo.Pass">
-        </div>
-    </div>
-  
-    @if (Model.successMessage.Length > 0)
-    {
+    <form method="post">
         <div class="row mb-3">
-            <div class="col-sm-9">
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong>@Model.successMessage</strong>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+            <input type="text" class="form-control" name="UserName" placeholder="Username" value="@Model.loginInfo.UserName">
+        </div>
+        <div class="row mb-3">
+            <input type="text" class="form-control" name="Pass" placeholder="Password" value="@Model.loginInfo.Pass">
+        </div>
+  
+        @if (Model.successMessage.Length > 0)
+        {
+            <div class="row mb-3">
+                <div class="col-sm-9">
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>@Model.successMessage</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+                    </div>
                 </div>
             </div>
+        }
+
+        <div class="offset-sm-3 col-sm-3 d-grid" style="margin: 30px auto 30px auto; width:70%;">
+            <button type="submit" class="btn btn-primary">Đăng nhập</button>
         </div>
-    }
+        <br />
+    </form>
 
-    <div class="offset-sm-3 col-sm-3 d-grid" style="margin: 30px auto 30px auto;">
-        <button type="submit" class="btn btn-primary">Đăng nhập</button>
-    </div>
-    <br />
-
-    <div class="col-sm-3 d-grid" style="margin:auto; text-align:center;">
-            <p>Bạn chưa có tài khoản?</p>
-            <a style="background-color:#0dac50;" class="btn btn-primary" href="/Hang/Create">Đăng kí</a>
-        </div>
-
-</form>
-
+</div>

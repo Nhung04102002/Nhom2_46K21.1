@@ -34,7 +34,7 @@ namespace QLCH_Nhom2.Pages
                 {
                     connection.Open();
 
-                    String sql1 = "select dbo.fCheckLogin (@UserName,@Pass)";
+                    String sql1 = "select dbo.fCheckLogin (@UserName, @Pass)";
 
                     using (SqlCommand command = new SqlCommand(sql1, connection))
                     {
