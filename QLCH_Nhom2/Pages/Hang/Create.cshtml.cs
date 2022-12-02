@@ -11,10 +11,35 @@ namespace QLCH_Nhom2.Pages.Hang
         public String successMessage = "";
         public void OnGet()
         {
+            try
+            {
+                String connectionString = "Data Source=.\\sqlexpress;Initial Catalog=Nhom2_QLBH;Integrated Security=True";
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    String sql = "select dbo.fNewMaHang()";
+
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                hangInfo.MaHang = reader.GetString(0);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                errorMessage = ex.Message;
+            }
         }
 
         public void OnPost()
         {
+            hangInfo.MaHang = Request.Form["MaHang"];
             hangInfo.TenHang = Request.Form["TenHang"];
             hangInfo.SoLuong = Convert.ToInt32(Request.Form["SoLuong"]);
             hangInfo.GiaNhap = Convert.ToDecimal(Request.Form["GiaNhap"]);
@@ -27,18 +52,18 @@ namespace QLCH_Nhom2.Pages.Hang
                 return;
             }
 
-            //lưu ncc mới vào database
             try
             {
                 String connectionString = "Data Source=.\\sqlexpress;Initial Catalog=Nhom2_QLBH;Integrated Security=True";
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
-                    var Hang = new List<string>() { hangInfo.TenHang, ""+hangInfo.SoLuong, ""+hangInfo.GiaNhap, ""+hangInfo.GiaBan };
-                    String sql = "exec pInsHang N'" + Hang[0] + "', '" + Hang[1] + "', '" + Hang[2] + "', '" + Hang[3] + "'";
-
-                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    
+                    String sql1 = "insert into HANG values (@MaHang, @TenHang, @SoLuong,@GiaNhap, @GiaBan)";
+                    
+                    using (SqlCommand command = new SqlCommand(sql1, connection))
                     {
+                        command.Parameters.AddWithValue("@MaHang", hangInfo.MaHang);
                         command.Parameters.AddWithValue("@TenHang", hangInfo.TenHang);
                         command.Parameters.AddWithValue("@SoLuong", hangInfo.SoLuong);
                         command.Parameters.AddWithValue("@GiaNhap", hangInfo.GiaNhap);
@@ -46,6 +71,7 @@ namespace QLCH_Nhom2.Pages.Hang
 
                         command.ExecuteNonQuery();
                     }
+
                 }
             }
             catch (Exception ex)

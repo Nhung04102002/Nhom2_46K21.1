@@ -14,6 +14,12 @@
 
 <form method="post">
     <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Mã hàng</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="MaHang" value="@Model.hangInfo.MaHang">
+        </div>
+    </div>
+    <div class="row mb-3">
         <label class="col-sm-3 col-form-label">Tên hàng</label>
         <div class="col-sm-6">
             <input type="text" class="form-control" name="TenHang" value="@Model.hangInfo.TenHang">

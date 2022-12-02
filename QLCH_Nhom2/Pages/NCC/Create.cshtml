@@ -14,6 +14,12 @@
 
 <form method="post">
     <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Mã nhà cung cấp</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="MaNCC" value="@Model.nccInfo.MaNCC">
+        </div>
+    </div>
+    <div class="row mb-3">
         <label class="col-sm-3 col-form-label">Tên nhà cung cấp</label>
         <div class="col-sm-6">
             <input type="text" class="form-control" name="TenNCC" value="@Model.nccInfo.TenNCC">
