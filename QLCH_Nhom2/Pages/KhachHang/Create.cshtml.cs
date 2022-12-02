@@ -40,7 +40,7 @@ namespace QLCH_Nhom2.Pages.KhachHang
 
         public void OnPost()
         {
-            khInfo.TenKH = Request.Form["MaKH"];
+            khInfo.MaKH = Request.Form["MaKH"];
             khInfo.TenKH = Request.Form["TenKH"];
             khInfo.SDT = Request.Form["SDT"];
             khInfo.DiaChi = Request.Form["DiaChi"];
@@ -57,8 +57,7 @@ namespace QLCH_Nhom2.Pages.KhachHang
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
-                    var Kh = new List<string>() { khInfo.TenKH, khInfo.SDT, khInfo.DiaChi };
-                    String sql1 = "insert into KHACHHANG values(@MaKH, @TenKH, @SDT, @DiaChi)";
+                    String sql1 = "insert into KHACHHANG values (@MaKH, @TenKH, @SDT, @DiaChi)";
 
                     using (SqlCommand command = new SqlCommand(sql1, connection))
                     {

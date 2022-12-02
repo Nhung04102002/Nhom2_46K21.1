@@ -52,6 +52,13 @@ namespace QLCH_Nhom2.Pages.Hang
                 return;
             }
 
+            if (hangInfo.SoLuong < 0 || hangInfo.GiaNhap > hangInfo.GiaBan ||
+                hangInfo.GiaNhap < 0 || hangInfo.GiaBan < 0)
+            {
+                errorMessage = "Thông tin không hợp lệ";
+                return;
+            }    
+
             try
             {
                 String connectionString = "Data Source=.\\sqlexpress;Initial Catalog=Nhom2_QLBH;Integrated Security=True";

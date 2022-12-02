@@ -39,7 +39,7 @@ namespace QLCH_Nhom2.Pages.NCC
 
         public void OnPost() 
         {
-            nccInfo.TenNCC = Request.Form["MaNCC"];
+            nccInfo.MaNCC = Request.Form["MaNCC"];
             nccInfo.TenNCC = Request.Form["TenNCC"];
             nccInfo.DiaChi = Request.Form["DiaChi"];
             nccInfo.SDT = Request.Form["SDT"];
@@ -57,7 +57,7 @@ namespace QLCH_Nhom2.Pages.NCC
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
-                    String sql1 = "insert into NCC values(@MaNCC, @TenNCC, @SDT, @DiaChi)";
+                    String sql1 = "insert into NCC values(@MaNCC, @TenNCC, @DiaChi, @SDT)";
 
                     using (SqlCommand command = new SqlCommand(sql1, connection))
                     {
