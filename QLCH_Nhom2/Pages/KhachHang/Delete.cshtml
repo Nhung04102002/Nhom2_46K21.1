@@ -1,23 +1,49 @@
 ﻿@page
 @using System.Data.SqlClient;
+@using QLCH_Nhom2.Pages.KhachHang;
 @model QLCH_Nhom2.Pages.KhachHang.DeleteModel
 @{
+    KHInfo ret = new KHInfo();
     try
     {
         String MaKH = Request.Query["MaKH"];
-
+        var a = "";
         String connectionString = "Data Source=.\\sqlexpress;Initial Catalog=Nhom2_QLBH;Integrated Security=True";
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
             connection.Open();
-            String sql = "delete KHACHHANG where MaKH=@MaKH";
-
+            String sql = "select dbo.fCheckKH_HD(@MaKH)";
+            String sql1 = "delete HOADON where MaKH=@MaKH";
+            String sql2 = "delete KHACHHANG where MaKH=@MaKH";
             using (SqlCommand command = new SqlCommand(sql, connection))
+            {
+                command.Parameters.AddWithValue("@MaKH", MaKH);
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        ret.result = reader.GetInt32(0);
+                    }
+
+                }
+                if (ret.result == 1)
+                {
+                    a = sql1;
+                }
+                else
+                {
+                    a = sql2;
+                }
+
+            }
+            using (SqlCommand command = new SqlCommand(a, connection))
             {
                 command.Parameters.AddWithValue("@MaKH", MaKH);
 
                 command.ExecuteNonQuery();
             }
+
         }
     }
     catch (Exception)

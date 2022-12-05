@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace QLCH_Nhom2.Pages
+namespace QLCH_Nhom2.Pages.HoaDon
 {
-    public class DangKiModel : PageModel
+    public class InsertCTHDModel : PageModel
     {
         public void OnGet()
         {

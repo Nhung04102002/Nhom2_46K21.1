@@ -1,0 +1,30 @@
+﻿@page
+@using System.Data.SqlClient;
+@model QLCH_Nhom2.Pages.HoaDon.DeleteCTHDModel
+@{
+    try
+    {
+        String MaHD = Request.Query["MaHD"];
+        String MaHang = Request.Query["MaHang"];
+
+        String connectionString = "Data Source=.\\sqlexpress;Initial Catalog=Nhom2_QLBH;Integrated Security=True";
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            connection.Open();
+            String sql = "delete CT_HOADON where MaHD=@MaHD and MaHang=@MaHang";
+
+            using (SqlCommand command = new SqlCommand(sql, connection))
+            {
+                command.Parameters.AddWithValue("@MaHD", @MaHD);
+                command.Parameters.AddWithValue("@MaHang", @MaHang);
+
+                command.ExecuteNonQuery();
+            }
+        }
+    }
+    catch (Exception)
+    {
+
+    }
+    Response.Redirect("/HoaDon/CTHD");
+}

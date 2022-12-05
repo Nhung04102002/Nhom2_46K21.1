@@ -53,7 +53,7 @@ namespace QLCH_Nhom2.Pages
                         if (loginInfo.result == 1)
                         {
                             successMessage = "Đăng nhập thành công!";
-                            Response.Redirect("/TrangChu/Index");
+                            Response.Redirect("/HoaDon/Create");
                         }
                         else
                         {
