@@ -2,17 +2,42 @@
 @using System.Data.SqlClient;
 @model QLCH_Nhom2.Pages.HoaDon.DeleteModel
 @{
+    HDInfo ret = new HDInfo();
     try
     {
         String MaHD = Request.Query["MaHD"];
-
+        var a = "";
         String connectionString = "Data Source=.\\sqlexpress;Initial Catalog=Nhom2_QLBH;Integrated Security=True";
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
             connection.Open();
-            String sql = "delete CT_HOADON where MaHD=@MaHD";
-
+            String sql = "select dbo.fCheckHD_CTHD(@MaHD)";
+            String sql1 = "delete CT_HOADON where MaHD=@MaHD";
+            String sql2 = "delete HOADON where MaHD=@MaHD";
             using (SqlCommand command = new SqlCommand(sql, connection))
+            {
+                command.Parameters.AddWithValue("@MaHD", MaHD);
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        ret.result = reader.GetInt32(0);
+                    }
+
+                }
+                if (ret.result == 1)
+                {
+                    a = sql1;
+                }
+                else
+                {
+                    a = sql2;
+                }
+
+            }
+
+            using (SqlCommand command = new SqlCommand(a, connection))
             {
                 command.Parameters.AddWithValue("@MaHD", MaHD);
 

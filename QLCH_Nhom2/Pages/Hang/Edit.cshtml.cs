@@ -60,6 +60,12 @@ namespace QLCH_Nhom2.Pages.Hang
                 errorMessage = "Thông tin không được để trống";
                 return;
             }
+            if (hangInfo.SoLuong < 0 || hangInfo.GiaNhap > hangInfo.GiaBan ||
+                hangInfo.GiaNhap < 0 || hangInfo.GiaBan < 0)
+            {
+                errorMessage = "Thông tin không hợp lệ";
+                return;
+            }
 
             try
             {

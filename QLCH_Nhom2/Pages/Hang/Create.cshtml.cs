@@ -46,8 +46,7 @@ namespace QLCH_Nhom2.Pages.Hang
             hangInfo.GiaNhap = Convert.ToDecimal(Request.Form["GiaNhap"]);
             hangInfo.GiaBan = Convert.ToDecimal(Request.Form["GiaBan"]);
 
-            if (hangInfo.TenHang.Length == 0 || hangInfo.SoLuong == 0 ||
-                hangInfo.GiaNhap == 0 || hangInfo.GiaBan == 0)
+            if (hangInfo.TenHang.Length == 0 || hangInfo.GiaNhap == 0 || hangInfo.GiaBan == 0)
             {
                 errorMessage = "Thông tin không được để trống";
                 return;

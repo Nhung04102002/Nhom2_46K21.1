@@ -15,7 +15,7 @@ namespace QLCH_Nhom2.Pages.NCC
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
-                    string sql = "SELECT * FROM NCC";
+                    string sql = "SELECT * FROM NCC where DiaChi <>'1'";
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
                         using (SqlDataReader reader = command.ExecuteReader())
@@ -54,7 +54,7 @@ namespace QLCH_Nhom2.Pages.NCC
                 {
                     connection.Open();
                     var search = new List<string>() { searchInfo.Search };
-                    String sql1 = "select * from NCC where TenNCC like '%" + search[0] + "%' or MaNCC like '%" + search[0] + "%'";
+                    String sql1 = "select * from NCC where (TenNCC like '%" + search[0] + "%' or MaNCC like '%" + search[0] + "%') and DiaChi <>'1'";
 
                     using (SqlCommand command = new SqlCommand(sql1, connection))
                     {

@@ -57,7 +57,7 @@ namespace QLCH_Nhom2.Pages.NhapHang
                 {
                     connection.Open();
                     var search = new List<string>() { searchInfo.Search };
-                    String sql1 = "select MaNK, TenNCC, NgayNhap, ThanhToan from PhieuNK join NCC on PhieuNK.MaNCC = NCC.MaNCC where MaNK like '%" + search[0] + "%'";
+                    String sql1 = "select MaNK, TenNCC, NgayNhap, ThanhToan from PhieuNK join NCC on PhieuNK.MaNCC = NCC.MaNCC where MaNK like '%" + search[0] + "%' or TenNCC like '%" + search[0] + "%'";
 
                     using (SqlCommand command = new SqlCommand(sql1, connection))
                     {
@@ -93,5 +93,9 @@ namespace QLCH_Nhom2.Pages.NhapHang
         public string? TenNCC;
         public DateTime NgayNhap;
         public decimal ThanhToan;
+        public string MaNCC;
+        public double ChietKhau;
+        public decimal TongTien;
+        public int result;
     }
 }

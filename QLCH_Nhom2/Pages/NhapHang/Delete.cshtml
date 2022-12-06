@@ -2,17 +2,41 @@
 @using System.Data.SqlClient;
 @model QLCH_Nhom2.Pages.NhapHang.DeleteModel
 @{
+    NKInfo ret = new NKInfo();
     try
     {
         String MaNK = Request.Query["MaNK"];
-
+        var a = "";
         String connectionString = "Data Source=.\\sqlexpress;Initial Catalog=Nhom2_QLBH;Integrated Security=True";
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
             connection.Open();
-            String sql = "delete CT_PhieuNK where MaNK=@MaNK";
+            String sql = "select dbo.fCheckNK_CTNK(@MaNK)";
+            String sql1 = "delete CT_PhieuNK where MaNK=@MaNK";
+            String sql2 = "delete PhieuNK where MaNK=@MaNK";
 
             using (SqlCommand command = new SqlCommand(sql, connection))
+            {
+                command.Parameters.AddWithValue("@MaNK", MaNK);
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        ret.result = reader.GetInt32(0);
+                    }
+
+                }
+                if (ret.result == 1)
+                {
+                    a = sql1;
+                }
+                else
+                {
+                    a = sql2;
+                }
+            }
+            using (SqlCommand command = new SqlCommand(a, connection))
             {
                 command.Parameters.AddWithValue("@MaNK", MaNK);
 

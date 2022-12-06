@@ -15,7 +15,7 @@ namespace QLCH_Nhom2.Pages.Hang
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
-                    string sql = "SELECT * FROM HANG where MaHang not like '%SP000000%'";
+                    string sql = "SELECT * FROM HANG where SoLuong >= 0";
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
                         using (SqlDataReader reader = command.ExecuteReader())
@@ -57,12 +57,10 @@ namespace QLCH_Nhom2.Pages.Hang
                 {
                     connection.Open();
                     var search = new List<string>() {searchInfo.Search};
-                    String sql1 = "select * from HANG where MaHang like '%" + search[0] + "%' or TenHang like '%" + search[0] + "%'";
+                    String sql1 = "select * from HANG where (MaHang like '%" + search[0] + "%' or TenHang like '%" + search[0] + "%') and SoLuong>=0";
 
                     using (SqlCommand command = new SqlCommand(sql1, connection))
                     {
-                        command.Parameters.AddWithValue("@Search", searchInfo.Search);
-
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
                             while (reader.Read())

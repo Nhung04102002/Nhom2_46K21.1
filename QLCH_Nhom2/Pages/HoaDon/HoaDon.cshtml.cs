@@ -100,6 +100,7 @@ namespace QLCH_Nhom2.Pages.HoaDon
         public double ChietKhau;
         public decimal ThanhToan;
         public string MaKH;
+        public int result;
     }
 
     
